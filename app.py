@@ -85,7 +85,7 @@ st.markdown("---")
 st.subheader("2. 计算结果")
 st.metric(label="反应速率常数 k (s⁻¹)", value=f"{k:.4e}")
 
-# -------------------------- 绘图区（配色同步优化） --------------------------
+# -------------------------- 绘图区（已修复Y轴标签） --------------------------
 st.subheader("3. 阿伦尼乌斯图")
 fig, ax = plt.subplots(figsize=(10, 6))
 
@@ -102,23 +102,4 @@ else:
     T_range = np.linspace(273, 1000, 100)
     k_range = A * np.exp(-Ea_J / (R * T_range))
     ax.plot(1/T_range, np.log(k_range), color="#165DFF", linewidth=3)
-    ax.scatter(1/T, np.log(k), color="#36D399", s=60, zorder=5, label=f"当前点 (T={T}K)")
-    ax.legend()
-
-ax.set_xlabel("1/T (K⁻¹)", color="#1E293B")
-ax.set_ylabel("ln(k)", color="#1E293B")
-ax.set_title("阿伦尼乌斯图", color="#1E293B")
-ax.grid(alpha=0.3)
-fig.patch.set_facecolor("#F8FAFC")
-ax.set_facecolor("#FFFFFF")
-
-st.pyplot(fig)
-
-# -------------------------- 结果分析 --------------------------
-st.subheader("4. 结果分析")
-st.info("""
-💡 结论：
-- 活化能越高（曲线越陡），温度对反应速率的影响越大。
-- 温度升高（1/T 减小），所有反应的速率常数都会增大。
-- 阿伦尼乌斯图的斜率为 $-E_a/R$，可通过直线斜率计算活化能。
-""")
+    ax....
